@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Flashcards</string>
+    <string name="term">Term</string>
+    <string name="description">Description</string>
+    <string name="add">Add Card</string>
+    <string name="finish">Create Set</string>
+    <string name="cancel">Cancel</string>
+    <string name="categoryName">Category Name</string>
+    <string name="categoryCreate">Create Category</string>
+    <string name="categoryAdd">Add New Category</string>
+    <string name="cardAdd">Add Card</string>
+</resources>
