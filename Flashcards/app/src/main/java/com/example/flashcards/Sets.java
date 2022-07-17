@@ -8,14 +8,12 @@ import androidx.room.PrimaryKey;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 @Entity(indices = {@Index(value = {"setId", "name"}, unique = true)})
-public class Sets {
+public class Sets{
     @PrimaryKey(autoGenerate = true)
     public long setId;
     public String name;
-    public int colour;
 
-    public Sets(String name, int colour){
+    public Sets(String name){
         this.name = name;
-        this.colour = colour;
     }
 }

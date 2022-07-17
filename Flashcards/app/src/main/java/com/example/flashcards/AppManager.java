@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class AppManager extends Application {
     ArrayList<Flashcard> cards = new ArrayList<Flashcard>();
 
+    Sets firstSet;
     public AppManager(){
 
     }

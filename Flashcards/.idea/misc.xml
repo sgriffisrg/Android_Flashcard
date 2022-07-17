@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/activity_create_cards.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/dialog_newcard.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/dialog_newset.xml" value="0.33" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/fragment_create__cards.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/fragment_set_dialog.xml" value="0.22" />
         <entry key="..\:/MAPAssignments/Flashcards/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/MAPAssignments/Flashcards/app/src/main/res/layout/activity_new_card.xml" value="0.358695652173913" />
         <entry key="..\:/MAPAssignments/Flashcards/app/src/main/res/layout/activity_review_cards.xml" value="0.358695652173913" />

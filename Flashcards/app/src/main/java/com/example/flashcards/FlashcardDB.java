@@ -3,7 +3,7 @@ package com.example.flashcards;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Flashcard.class, Sets.class, Categories.class, SetCardCrossRef.class}, version = 3)
+@Database(entities = {Flashcard.class, Sets.class, Categories.class, SetCardCrossRef.class}, version = 4)
     public abstract class FlashcardDB extends RoomDatabase {
         public abstract FlashcardDAO cardsDao();
 }

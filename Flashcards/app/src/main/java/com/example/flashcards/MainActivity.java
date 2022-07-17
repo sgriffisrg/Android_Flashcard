@@ -2,6 +2,8 @@ package com.example.flashcards;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Layout;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +23,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SetDialogFragment.DialogClickListener {
     ArrayList<Flashcard> cards;
     EditText flexibleEdit;
     Button cardbutt;
@@ -36,49 +39,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        AlertDialog.Builder builder = alertBuilder(R.layout.dialog_newset, R.string.finish, R.string.cancel, false, R.string.finish);
-        LayoutInflater inflater = LayoutInflater.from(builder.getContext());
-        View v = inflater.inflate(R.layout.dialog_newset, null, false);
-        flexibleEdit = (EditText)v.findViewById(R.id.SetName);
-        AlertDialog dialog = builder.create();
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (flexibleEdit.getText().toString().isEmpty()) {
-                            Toast.makeText(getApplicationContext(), "Please enter a set name", Toast.LENGTH_SHORT).show();
-                        } else {
-                            dialog.dismiss();
-                        }
-                    }
-                });
-                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                            dialog.dismiss();
-                    }
-                });
-            }
-        });
-        dialog.show();
+        SetDialogFragment setDialog = SetDialogFragment.newInstance();
+        setDialog.show(getSupportFragmentManager(), SetDialogFragment.Tag);
+        setDialog.listener = this;
     }
 
-    public AlertDialog.Builder alertBuilder(int layout, int positiveButton, int negativeButton, boolean cancel, int title){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        Context context1 = builder.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context1);
-        View view = inflater.inflate(layout, null, false);
-        flexibleEdit = (EditText)view.findViewById(R.id.SetName);
-
-        builder.setView(inflater.inflate(layout, null))
-                .setPositiveButton(positiveButton, null)
-                .setNegativeButton(negativeButton, null)
-                .setCancelable(cancel)
-                .setTitle(title);
-
-        return builder;
+    @Override
+    public void dialogListenerCreateSet(String setName) {
+        ((AppManager)getApplication()).firstSet = new Sets(setName);
     }
 
+    @Override
+    public void dialogListenerCancel() {
+
+    }
 }
