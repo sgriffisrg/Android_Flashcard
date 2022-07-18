@@ -23,7 +23,7 @@ public class SetDialogFragment extends DialogFragment {
 
     public interface DialogClickListener {
         void dialogListenerCreateSet(String setName);
-        void dialogListenerCancel();
+        void setDialogListenerCancel();
     }
 
     public DialogClickListener listener;
@@ -58,13 +58,6 @@ public class SetDialogFragment extends DialogFragment {
         setStyle(DialogFragment.STYLE_NORMAL,R.style.SetStyle);
     }
 
-/*    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.setTitle("My Title");
-        return dialog;
-    }*/
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,7 +70,7 @@ public class SetDialogFragment extends DialogFragment {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.dialogListenerCancel();
+                listener.setDialogListenerCancel();
                 dismiss();
             }
         });
@@ -85,11 +78,11 @@ public class SetDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 if(setName.getText().toString().isEmpty()){
-                    Toast.makeText(view.getContext(), "Please enter a name for the set", Toast.LENGTH_SHORT);
+                    Toast.makeText(view.getContext(), "Please enter a name for the set", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    listener.dialogListenerCreateSet(setName.getText().toString());
                     dismiss();
+                    listener.dialogListenerCreateSet(setName.getText().toString());
                 }
             }
         });

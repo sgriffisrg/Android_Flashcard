@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,10 +19,16 @@ import android.view.ViewGroup;
  */
 public class Create_Cards extends DialogFragment {
 
+    public interface CardDialogClickListener {
+        void dialogListenerAddCard(String term, String description, long setId);
+        void cardDialogListenerCancel(Sets set);
+    }
+    CardDialogClickListener listener;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     public static final String Tag = "tag";
+    public static Sets sets;
 
     // TODO: Rename and change types of parameters
     private String setName;
@@ -36,11 +45,12 @@ public class Create_Cards extends DialogFragment {
      * @return A new instance of fragment Create_Cards.
      */
     // TODO: Rename and change types and number of parameters
-    public static Create_Cards newInstance(String param1) {
+    public static Create_Cards newInstance(String param1, Sets set) {
         Create_Cards fragment = new Create_Cards();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
+        sets = set;
         return fragment;
     }
 
@@ -59,7 +69,36 @@ public class Create_Cards extends DialogFragment {
         // Inflate the layout for this fragment
         getDialog().setCancelable(false);
         getDialog().setTitle("Add Cards");
-        View v = inflater.inflate(R.layout.fragment_set_dialog, container, false);
+        View v = inflater.inflate(R.layout.fragment_create__cards, container, false);
+        Button cancel = v.findViewById(R.id.cancelCard);
+        Button add = v.findViewById(R.id.createCard);
+        EditText term = v.findViewById(R.id.makeTerm);
+        EditText definition = v.findViewById(R.id.makeDefinition);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "All Done", Toast.LENGTH_SHORT).show();
+                listener.cardDialogListenerCancel(sets);
+                dismiss();
+            }
+        });
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(term.getText().toString().isEmpty() || definition.getText().toString().isEmpty()){
+                    Toast.makeText(view.getContext(), "Please make sure you've filled out each box", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(view.getContext(), "A card for " + term.getText().toString() + " has been made.", Toast.LENGTH_SHORT).show();
+                    sets.countIncrease();
+                    listener.dialogListenerAddCard(term.getText().toString(), definition.getText().toString(), sets.setId);
+                    term.setText("");
+                    definition.setText("");
+                    term.requestFocus();
+                }
+            }
+        });
         return v;
 
     }

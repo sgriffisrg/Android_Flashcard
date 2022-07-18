@@ -10,8 +10,7 @@ public class SetWithCards {
     @Embedded public Sets set;
     @Relation(
             parentColumn = "setId",
-            entityColumn = "cardId",
-            associateBy = @Junction(SetCardCrossRef.class)
+            entityColumn = "setOwnedId"
     )
     public List<Flashcard> cards;
 }

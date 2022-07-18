@@ -2,10 +2,11 @@
     <string name="app_name">Flashcards</string>
     <string name="set">Please enter the set name</string>
     <string name="term">Please enter the term</string>
-    <string name="description">Enter the description</string>
+    <string name="definition">Enter the definition</string>
     <string name="add">Add Card</string>
     <string name="finish">Create Set</string>
     <string name="cancel">Cancel</string>
+    <string name="completeCards">All Done</string>
     <string name="categoryName">Category Name</string>
     <string name="categoryCreate">Create Category</string>
     <string name="categoryAdd">Add New Category</string>
