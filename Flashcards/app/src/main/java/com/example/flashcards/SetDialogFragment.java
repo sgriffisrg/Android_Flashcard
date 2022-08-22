@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SetDialogFragment#newInstance} factory method to
@@ -22,7 +25,7 @@ import android.widget.Toast;
 public class SetDialogFragment extends DialogFragment {
 
     public interface DialogClickListener {
-        void dialogListenerCreateSet(String setName);
+        void dialogListenerCreateSet(String setName, String description);
         void setDialogListenerCancel();
     }
 
@@ -64,7 +67,8 @@ public class SetDialogFragment extends DialogFragment {
         getDialog().setCancelable(false);
         getDialog().setTitle("Create Set");
         View v = inflater.inflate(R.layout.fragment_set_dialog, container, false);
-        EditText setName = v.findViewById(R.id.SetName);
+        TextInputEditText setName = v.findViewById(R.id.SetName);
+        TextInputEditText description = v.findViewById(R.id.setDescription);
         Button cancel = v.findViewById(R.id.cancelSet);
         Button createSet = v.findViewById(R.id.createSet);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +86,7 @@ public class SetDialogFragment extends DialogFragment {
                 }
                 else {
                     dismiss();
-                    listener.dialogListenerCreateSet(setName.getText().toString());
+                    listener.dialogListenerCreateSet(setName.getText().toString(), description.getText().toString());
                 }
             }
         });

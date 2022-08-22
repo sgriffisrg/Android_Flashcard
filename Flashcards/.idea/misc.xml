@@ -3,13 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/activity_all_cards.xml" value="0.25" />
         <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/activity_create_cards.xml" value="0.18802083333333333" />
-        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/activity_review_cards.xml" value="0.1703125" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/activity_set_details.xml" value="0.33" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/app_bar_layout.xml" value="0.15217391304347827" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/back_card.xml" value="0.17395833333333333" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/card_fragment_back.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/card_fragment_front.xml" value="0.36666666666666664" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/card_list_layout.xml" value="0.33" />
         <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/dialog_newcard.xml" value="0.18802083333333333" />
         <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/dialog_newset.xml" value="0.33" />
         <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/fragment_create__cards.xml" value="0.36666666666666664" />
-        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/fragment_set_dialog.xml" value="0.22" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/fragment_set_dialog.xml" value="0.25" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/front_card.xml" value="0.17395833333333333" />
         <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/layout/set_row_layout.xml" value="0.22" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/menu/appbar_stuff.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/menu/header_navigation_drawer.xml" value="0.18802083333333333" />
+        <entry key="..\:/Android Portfolio/Android_Flashcard/Flashcards/app/src/main/res/menu/set_list_menubar.xml" value="0.18802083333333333" />
         <entry key="..\:/MAPAssignments/Flashcards/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/MAPAssignments/Flashcards/app/src/main/res/layout/activity_new_card.xml" value="0.358695652173913" />
         <entry key="..\:/MAPAssignments/Flashcards/app/src/main/res/layout/activity_review_cards.xml" value="0.358695652173913" />

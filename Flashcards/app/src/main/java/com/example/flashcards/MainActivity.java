@@ -1,28 +1,32 @@
 package com.example.flashcards;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.widget.Toolbar;
+
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
+
+import android.app.ActivityOptions;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.Layout;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.Window;
 import android.widget.Toast;
+
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,29 +35,70 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<Sets> sets;
     RecyclerView setView;
     Sets set;
-    Button cardbutt;
+    FloatingActionButton addSet;
     SetRecyclerAdapter recyclerAdapter;
     DbManager manager;
-
-    int amt = 0;
+    Toolbar toolbar;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    NavigationView nav_view;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().setExitTransition(new Slide());
+        getWindow().setEnterTransition(new Explode());
+        nav_view = findViewById(R.id.nav_view);
         manager = ((AppManager)getApplication()).db;
         manager.getDatabase(this);
         manager.listener = this;
+        addSet = findViewById(R.id.addSet);
+        addSet.setOnClickListener(this);
         sets = ((AppManager) getApplication()).sets;
-        cardbutt = findViewById(R.id.button);
-        cardbutt.setOnClickListener(this);
         manager.getAllSets();
         recyclerAdapter = new SetRecyclerAdapter(sets,this);
         recyclerAdapter.listener = this;
         setView = findViewById(R.id.setRecyclerView);
         setView.setLayoutManager(new LinearLayoutManager(this));
         setView.setAdapter(recyclerAdapter);
+        toolbar = findViewById(R.id.topAppBar);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+        nav_view.getMenu().findItem(R.id.toAllSets).setChecked(true);
 
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle("Set List");
+        intent = new Intent(this, AllCards.class);
+
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId() == R.id.toAllCards) {
+                    nav_view.getMenu().findItem(R.id.toAllSets).setChecked(false);
+                    drawerLayout.close();
+                    startActivity(intent);
+                    return true;
+                }
+
+                return true;
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
+        if(actionBarDrawerToggle.onOptionsItemSelected(item)){
+            if(drawerLayout.isOpen())
+                drawerLayout.close();
+            else
+                drawerLayout.open();
+        }
+        return true;
     }
 
     @Override
@@ -64,16 +109,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void dialogListenerCreateSet(String setName) {
-        set = new Sets(setName);
-        Create_Cards cardDialog = Create_Cards.newInstance(setName, set);
-        cardDialog.show(getSupportFragmentManager(), Create_Cards.Tag);
-        cardDialog.listener = this;
+    public void dialogListenerCreateSet(String setName, String description) {
+        set = new Sets(setName, description);
+        manager.addNewSet(set);
     }
 
     @Override
-    public void dialogListenerAddCard(String term, String description, long setId) {
-        manager.addNewCard(new Flashcard(term, description, setId));
+    public void dialogListenerAddCard(String term, String description, long setId, String setName) {
+        manager.checkForClones(term, description, setId, setName);
     }
 
     @Override
@@ -83,16 +126,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void cardDialogListenerCancel(Sets set) {
-        manager.addNewSet(set);
-        manager.getAllSets();
+        manager.updateSet(set);
     }
 
     @Override
-    public void setClicked() {
+    public void setClicked(Sets set) {
+        Intent intent = new Intent(this, SetDetails.class);
+        intent.putExtra("setId", set.setId);
+
+        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+    }
+
+    @Override
+    public void longSetClicked(Sets set) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Delete Set?")
+                .setMessage("Do you want to delete this set?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        manager.deleteCardsInSet(set.setId, set);
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setNegativeButton("Nah", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
     public void added(String setName) {
+        manager.getOneSet(setName);
     }
 
     @Override
@@ -114,17 +183,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void deleted(String name) {
+    public void deletedSet(String setName) {
+        Toast.makeText(getApplicationContext(), setName + " has been deleted.", Toast.LENGTH_SHORT).show();
+        manager.getAllSets();
+    }
 
+    @Override
+    public void cloneCheck(int totalAmt, String term, String definition, long setId, String setName) {
+        manager.addNewCard(new Flashcard(term, definition, setId, totalAmt, setName));
     }
 
     @Override
     public void setUpdated(String setName) {
-
+        manager.getAllSets();
     }
 
     @Override
     public void setReady(Sets set) {
 
     }
+
+    @Override
+    public void deleteSet(Sets set) {
+        manager.deleteSet(set);
+    }
+
+    @Override
+    public void bye() {
+        Toast.makeText(getApplicationContext(), "bye", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getSet(Sets set) {
+        Toast.makeText(getApplicationContext(), set.name, Toast.LENGTH_SHORT).show();
+        Create_Cards cardDialog = Create_Cards.newInstance(set.name, set);
+        cardDialog.show(getSupportFragmentManager(), Create_Cards.Tag);
+        cardDialog.listener = this;
+    }
+
+    @Override
+    public void cloneCardsReady(List<Flashcard> cards) {
+
+    }
+
+    @Override
+    public void deleteCard(String term) {
+
+    }
+
+
 }

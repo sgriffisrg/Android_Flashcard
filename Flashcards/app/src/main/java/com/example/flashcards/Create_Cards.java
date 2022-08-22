@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Create_Cards#newInstance} factory method to
@@ -20,7 +23,7 @@ import android.widget.Toast;
 public class Create_Cards extends DialogFragment {
 
     public interface CardDialogClickListener {
-        void dialogListenerAddCard(String term, String description, long setId);
+        void dialogListenerAddCard(String term, String description, long setId, String setName);
         void cardDialogListenerCancel(Sets set);
     }
     CardDialogClickListener listener;
@@ -72,8 +75,8 @@ public class Create_Cards extends DialogFragment {
         View v = inflater.inflate(R.layout.fragment_create__cards, container, false);
         Button cancel = v.findViewById(R.id.cancelCard);
         Button add = v.findViewById(R.id.createCard);
-        EditText term = v.findViewById(R.id.makeTerm);
-        EditText definition = v.findViewById(R.id.makeDefinition);
+        TextInputEditText term = v.findViewById(R.id.makeTerm);
+        TextInputEditText definition = v.findViewById(R.id.makeDefinition);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,8 +94,7 @@ public class Create_Cards extends DialogFragment {
                 }
                 else {
                     Toast.makeText(view.getContext(), "A card for " + term.getText().toString() + " has been made.", Toast.LENGTH_SHORT).show();
-                    sets.countIncrease();
-                    listener.dialogListenerAddCard(term.getText().toString(), definition.getText().toString(), sets.setId);
+                    listener.dialogListenerAddCard(term.getText().toString(), definition.getText().toString(), sets.setId, sets.name);
                     term.setText("");
                     definition.setText("");
                     term.requestFocus();

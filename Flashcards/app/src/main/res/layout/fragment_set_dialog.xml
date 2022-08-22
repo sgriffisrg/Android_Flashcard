@@ -17,25 +17,44 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-            <EditText
-                android:id="@+id/SetName"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="@string/set"
-                android:inputType="text"/>
+                android:layout_margin="4dp"
+                android:hint="@string/set">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/SetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:hint="@string/description">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/setDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="right">
 
             <Button
                 android:id="@+id/createSet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/finish"
+                android:textSize="16sp"
                 android:textColor="@color/black" />
             <Space
                 android:layout_width="10dp"
@@ -45,9 +64,11 @@
 
             <Button
                 android:id="@+id/cancelSet"
-                android:layout_width="103dp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
+                android:textSize="18sp"
                 android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>

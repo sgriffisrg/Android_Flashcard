@@ -17,44 +17,57 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
-            <EditText
-                android:id="@+id/makeTerm"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="@string/term"
-                android:inputType="text"/>
-            <EditText
-                android:id="@+id/makeDefinition"
+                android:layout_margin="4dp"
+                android:hint="@string/term">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/makeTerm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:hint="@string/definition"
-                android:inputType="text"/>
+                android:layout_margin="4dp"
+                android:hint="@string/definition">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/makeDefinition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="right">
 
             <Button
-                android:id="@+id/createCard"
+                android:id="@+id/cancelCard"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/cardAdd"
-                android:textColor="@color/black" />
+                android:text="@string/completeCards"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
             <Space
                 android:layout_width="10dp"
                 android:layout_height="1dp"
                 android:layout_weight="1" >
             </Space>
-
             <Button
-                android:id="@+id/cancelCard"
+                android:id="@+id/createCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/completeCards"
-                android:textColor="@color/black"/>
+                android:text="@string/cardAdd"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 

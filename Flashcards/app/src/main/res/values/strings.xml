@@ -12,5 +12,13 @@
     <string name="categoryAdd">Add New Category</string>
     <string name="cardAdd">Add Card</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="setList">Set List</string>
+    <string name="switchToAllCards">All Cards</string>
+    <string name="headerTitle">Cue Cards</string>
+    <string name="headerText">s t u d y</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="switchToAllSets">All Sets</string>
+    <string name="reviewCardsSet">Review Cards</string>
+    <string name="description">Please enter a description</string>
 </resources>

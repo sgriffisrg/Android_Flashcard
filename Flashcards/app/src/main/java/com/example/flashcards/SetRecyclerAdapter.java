@@ -19,7 +19,8 @@ public class SetRecyclerAdapter extends RecyclerView.Adapter<SetRecyclerAdapter.
     Context context;
 
     interface SetListener{
-        public void setClicked();
+        void setClicked(Sets set);
+        void longSetClicked(Sets set);
     }
 
     SetListener listener;
@@ -38,7 +39,7 @@ public class SetRecyclerAdapter extends RecyclerView.Adapter<SetRecyclerAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull SetViewHolder holder, int position) {
-        String cardNum = "Flashcards: " + setList.get(position).cardAmt;
+        String cardNum = "Description: " + setList.get(position).description ;
         holder.setName.setText(setList.get(position).name);
         holder.cardAmt.setText(cardNum);
     }
@@ -47,7 +48,7 @@ public class SetRecyclerAdapter extends RecyclerView.Adapter<SetRecyclerAdapter.
     public int getItemCount() { return setList.size(); }
 
 
-    class SetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class SetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView setName;
         TextView cardAmt;
         public SetViewHolder(@NotNull View itemView){
@@ -55,11 +56,18 @@ public class SetRecyclerAdapter extends RecyclerView.Adapter<SetRecyclerAdapter.
             setName = itemView.findViewById(R.id.displaySetName);
             cardAmt = itemView.findViewById(R.id.displayCardAmount);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            listener.setClicked();
+            listener.setClicked(setList.get(getAdapterPosition()));
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            listener.longSetClicked(setList.get(getAdapterPosition()));
+            return true;
         }
     }
 }

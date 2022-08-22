@@ -8,17 +8,14 @@ import androidx.room.PrimaryKey;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 @Entity(indices = {@Index(value = {"setId", "name"}, unique = true)})
-public class Sets{
+public class Sets {
     @PrimaryKey(autoGenerate = true)
     public long setId;
     public String name;
-    public int cardAmt = 0;
-
-    public Sets(String name){
+    public String description;
+    public Sets(String name, String description){
         this.name = name;
+        this.description = description;
     }
 
-    public void countIncrease(){
-        cardAmt++;
-    }
 }
