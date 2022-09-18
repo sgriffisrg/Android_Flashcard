@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ public class SetDetails extends AppCompatActivity implements Create_Cards.CardDi
     DbManager manager;
     long setId;
     Sets set;
+    Button reviewCards;
 
 
     @Override
@@ -39,6 +42,8 @@ public class SetDetails extends AppCompatActivity implements Create_Cards.CardDi
         cardRecyclerAdapter.listener = this;
         cardList.setLayoutManager(new GridLayoutManager(this, 2));
         cardList.setAdapter(cardRecyclerAdapter);
+        reviewCards = findViewById(R.id.reviewCardsFromSet);
+        reviewCards.setOnClickListener(this);
 
     }
 
@@ -138,6 +143,9 @@ public class SetDetails extends AppCompatActivity implements Create_Cards.CardDi
             case R.id.addCards:
                 break;
             case R.id.reviewCardsFromSet:
+                ((AppManager)getApplication()).cardsToBeReviewed = cards;
+                Intent intent = new Intent(this, ReviewCards.class);
+                startActivity(intent);
                 break;
         }
     }

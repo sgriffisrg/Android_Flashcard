@@ -25,7 +25,9 @@
 
         <activity
             android:name=".ReviewCards"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"

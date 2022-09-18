@@ -60,7 +60,7 @@ public class AllCards extends AppCompatActivity implements CardRecyclerAdapter.C
         cardRecyclerAdapter = new CardRecyclerAdapter(cards, this);
         cardRecyclerAdapter.listener = this;
         recyclerView = findViewById(R.id.cardListRecycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(cardRecyclerAdapter);
 
         nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

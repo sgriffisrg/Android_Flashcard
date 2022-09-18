@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="256dp"
+    android:layout_height="415dp"
     android:orientation="vertical"
-    android:background="@color/LavenderBlush"
+    android:background="@color/black"
     android:padding="16dp"
     android:gravity="center">
 
-    <TextView
-        android:layout_width="match_parent"
+    <com.daprlabs.cardstack.SwipeFrameLayout
+        xmlns:swipedeck="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/front_term"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:text="Test"
-        android:gravity="center"/>
+        android:background="@color/black"
+        android:layout_gravity="center">
+        <com.daprlabs.cardstack.SwipeDeck
+            android:id="@+id/swipe_deck"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            swipedeck:card_spacing="10dp"
+            swipedeck:max_visible="3"
+            swipedeck:render_above="true"
+            swipedeck:rotation_degrees="15"
+            android:clickable="true"/>
+    </com.daprlabs.cardstack.SwipeFrameLayout >
 
 </LinearLayout>
